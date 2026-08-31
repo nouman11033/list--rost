@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TFU Roster · BT groups · Kingdom 2362</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020; --panel: #121933; --line: #243056;
+      --text: #e8eefc; --muted: #93a0c2; --accent: #7dd3fc;
+      --early: #34d399; --late: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1d2a55 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #13243f 0%, transparent 50%),
+        var(--bg);
+      color: var(--text); min-height: 100vh;
+    }
+    main { max-width: 1140px; margin: 0 auto; padding: 32px 18px 64px; }
+    header {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      justify-content: space-between; align-items: end; margin-bottom: 22px;
+    }
+    h1 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: 0.08em; text-transform: uppercase; }
+    .sub { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 999px; padding: 8px 14px; font-size: 0.85rem;
+    }
+    .chip strong { color: var(--accent); }
+    .chip.early strong { color: var(--early); }
+    .chip.late strong { color: var(--late); }
+    .panel {
+      background: color-mix(in srgb, var(--panel) 92%, black);
+      border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+    .toolbar {
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 14px; border-bottom: 1px solid var(--line);
+    }
+    .toolbar-row {
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    }
+    input[type="search"] {
+      flex: 1; min-width: 200px; background: #0d1428;
+      border: 1px solid var(--line); color: var(--text);
+      border-radius: 10px; padding: 10px 12px; outline: none;
+    }
+    input[type="search"]:focus { border-color: var(--accent); }
+    .toggle {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 100%;
+      gap: 0;
+      background: #0d1428;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      padding: 3px;
+    }
+    .toggle button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 12px 10px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 9px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toggle button.active[data-filter="all"] {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+      color: var(--accent);
+    }
+    .toggle button.active[data-filter="01:00 UTC"] {
+      background: color-mix(in srgb, var(--early) 22%, transparent);
+      color: var(--early);
+    }
+    .toggle button.active[data-filter="18:00 UTC"] {
+      background: color-mix(in srgb, var(--late) 22%, transparent);
+      color: var(--late);
+    }
+    .showing {
+      color: var(--muted);
+      font-size: 0.85rem;
+      min-height: 1.2em;
+    }
+    .showing strong { color: var(--text); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+    th {
+      position: sticky; top: 0; background: #162041; color: var(--muted);
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; z-index: 1;
+    }
+    tbody tr:hover { background: rgba(125, 211, 252, 0.06); }
+    .pos { color: var(--muted); width: 48px; font-variant-numeric: tabular-nums; }
+    .name { font-weight: 650; }
+    .num { font-variant-numeric: tabular-nums; text-align: right; }
+    .muted { color: var(--muted); }
+    th.num { text-align: right; }
+    .role {
+      display: inline-flex; min-width: 36px; padding: 2px 8px; border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--c) 55%, transparent);
+      background: color-mix(in srgb, var(--c) 18%, transparent);
+      color: var(--c); font-weight: 700; font-size: 0.78rem; justify-content: center;
+    }
+    .bt {
+      display: inline-flex; padding: 3px 10px; border-radius: 999px;
+      font-weight: 700; font-size: 0.78rem; font-variant-numeric: tabular-nums;
+    }
+    .bt-early {
+      color: var(--early);
+      background: color-mix(in srgb, var(--early) 16%, transparent);
+      border: 1px solid color-mix(in srgb, var(--early) 45%, transparent);
+    }
+    .bt-late {
+      color: var(--late);
+      background: color-mix(in srgb, var(--late) 16%, transparent);
+      border: 1px solid color-mix(in srgb, var(--late) 45%, transparent);
+    }
+    footer { margin-top: 14px; color: var(--muted); font-size: 0.8rem; }
+    @media (max-width: 720px) { .hide-sm { display: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>[TFU] Roster</h1>
+        <p class="sub">Kingdom 2362 · BT groups marked · sorted within each group by Total Power</p>
+      </div>
+      <div class="stats">
+        <div class="chip"><strong>100</strong> players</div>
+        <div class="chip early"><strong>29</strong> @ 01:00 UTC · 604.49M</div>
+        <div class="chip late"><strong>71</strong> @ 18:00 UTC · 1.48B</div>
+        <div class="chip">Generated <strong>2026-08-31 13:31 UTC</strong></div>
+      </div>
+    </header>
+    <section class="panel">
+      <div class="toolbar">
+        <div class="toggle" id="filters" role="tablist" aria-label="BT filter">
+          <button type="button" role="tab" data-filter="all" class="active" aria-selected="true">All</button>
+          <button type="button" role="tab" data-filter="01:00 UTC" aria-selected="false">BT 01:00</button>
+          <button type="button" role="tab" data-filter="18:00 UTC" aria-selected="false">BT 18:00</button>
+        </div>
+        <div class="toolbar-row">
+          <input id="q" type="search" placeholder="Search player name…" autocomplete="off" />
+          <div class="showing" id="showing">Showing <strong>100</strong> players</div>
+        </div>
+      </div>
+      <div style="overflow:auto; max-height: 75vh;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th>Role</th>
+              <th>BT</th>
+              <th class="num">Total Power</th>
+              <th class="num hide-sm">Combat</th>
+              <th class="num hide-sm">Troop</th>
+              <th>Furnace</th>
+              <th class="num hide-sm">Kills</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+      <tr data-bt="01:00 UTC">
+        <td class="pos">1</td>
+        <td class="name">Merlin</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="45,195,273">45.20M</td>
+        <td class="num muted hide-sm">32.47M</td>
+        <td class="num muted hide-sm">12.72M</td>
+        <td>TC 30</td>
+        <td class="num muted hide-sm">11.27M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">2</td>
+        <td class="name">Vizuru</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="43,998,584">44.00M</td>
+        <td class="num muted hide-sm">31.82M</td>
+        <td class="num muted hide-sm">12.17M</td>
+        <td>TC 29</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">3</td>
+        <td class="name">TheyFearMe</td>
+        <td><span class="role" style="--c:#f59e0b">R5</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="34,363,107">34.36M</td>
+        <td class="num muted hide-sm">19.77M</td>
+        <td class="num muted hide-sm">14.59M</td>
+        <td>TC 30</td>
+        <td class="num muted hide-sm">1.50M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">4</td>
+        <td class="name">kivgrad</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="26,347,789">26.35M</td>
+        <td class="num muted hide-sm">20.25M</td>
+        <td class="num muted hide-sm">6.10M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">2.22M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">5</td>
+        <td class="name">DutyFree</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="24,485,504">24.49M</td>
+        <td class="num muted hide-sm">17.66M</td>
+        <td class="num muted hide-sm">6.82M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">1.95M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">6</td>
+        <td class="name">라지카쵸리</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="22,571,427">22.57M</td>
+        <td class="num muted hide-sm">17.63M</td>
+        <td class="num muted hide-sm">4.94M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">7</td>
+        <td class="name">Satpol PP</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="20,214,773">20.21M</td>
+        <td class="num muted hide-sm">14.13M</td>
+        <td class="num muted hide-sm">6.08M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">8</td>
+        <td class="name">مهدی</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="20,115,142">20.12M</td>
+        <td class="num muted hide-sm">13.58M</td>
+        <td class="num muted hide-sm">6.53M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">1.94M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">9</td>
+        <td class="name">WOOD</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="20,075,869">20.08M</td>
+        <td class="num muted hide-sm">15.93M</td>
+        <td class="num muted hide-sm">4.15M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">3.01M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">10</td>
+        <td class="name">~Zew~</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="19,870,672">19.87M</td>
+        <td class="num muted hide-sm">15.64M</td>
+        <td class="num muted hide-sm">4.23M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">11</td>
+        <td class="name">SNØW BERK</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="19,536,695">19.54M</td>
+        <td class="num muted hide-sm">12.74M</td>
+        <td class="num muted hide-sm">6.80M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">12</td>
+        <td class="name">KOR T380</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="19,469,657">19.47M</td>
+        <td class="num muted hide-sm">14.15M</td>
+        <td class="num muted hide-sm">5.32M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">13</td>
+        <td class="name">AKA</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="19,448,147">19.45M</td>
+        <td class="num muted hide-sm">13.98M</td>
+        <td class="num muted hide-sm">5.47M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">1.75M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">14</td>
+        <td class="name">CARTEL SPARTANs</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="19,301,380">19.30M</td>
+        <td class="num muted hide-sm">12.92M</td>
+        <td class="num muted hide-sm">6.39M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">15</td>
+        <td class="name">Choi</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="19,108,422">19.11M</td>
+        <td class="num muted hide-sm">14.25M</td>
+        <td class="num muted hide-sm">4.86M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">16</td>
+        <td class="name">kilord</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="18,891,473">18.89M</td>
+        <td class="num muted hide-sm">13.27M</td>
+        <td class="num muted hide-sm">5.62M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">17</td>
+        <td class="name">SaintM</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="18,198,455">18.20M</td>
+        <td class="num muted hide-sm">14.40M</td>
+        <td class="num muted hide-sm">3.80M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">18</td>
+        <td class="name">wolf leon</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="17,832,409">17.83M</td>
+        <td class="num muted hide-sm">12.50M</td>
+        <td class="num muted hide-sm">5.34M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">19</td>
+        <td class="name">BilboSwaggins</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="17,697,260">17.70M</td>
+        <td class="num muted hide-sm">13.76M</td>
+        <td class="num muted hide-sm">3.94M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">20</td>
+        <td class="name">bayo Angin</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="17,576,493">17.58M</td>
+        <td class="num muted hide-sm">13.81M</td>
+        <td class="num muted hide-sm">3.77M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">21</td>
+        <td class="name">Joyboy</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="17,236,080">17.24M</td>
+        <td class="num muted hide-sm">12.43M</td>
+        <td class="num muted hide-sm">4.81M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">22</td>
+        <td class="name">Lord Hero Kaspo</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="16,567,926">16.57M</td>
+        <td class="num muted hide-sm">12.38M</td>
+        <td class="num muted hide-sm">4.19M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">23</td>
+        <td class="name">Mathi201015</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="16,271,587">16.27M</td>
+        <td class="num muted hide-sm">11.96M</td>
+        <td class="num muted hide-sm">4.31M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">1.37M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">24</td>
+        <td class="name">saeed afshar zad</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="15,939,136">15.94M</td>
+        <td class="num muted hide-sm">11.64M</td>
+        <td class="num muted hide-sm">4.30M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">25</td>
+        <td class="name">faraz12</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="15,774,997">15.77M</td>
+        <td class="num muted hide-sm">13.18M</td>
+        <td class="num muted hide-sm">2.60M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">1.10M</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">26</td>
+        <td class="name">Billyyinyin</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="15,415,867">15.42M</td>
+        <td class="num muted hide-sm">12.02M</td>
+        <td class="num muted hide-sm">3.40M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">27</td>
+        <td class="name">Eliassito99</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="14,865,988">14.87M</td>
+        <td class="num muted hide-sm">10.42M</td>
+        <td class="num muted hide-sm">4.45M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">28</td>
+        <td class="name">Victer</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="14,424,624">14.42M</td>
+        <td class="num muted hide-sm">10.42M</td>
+        <td class="num muted hide-sm">4.01M</td>
+        <td>TC 22</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="01:00 UTC">
+        <td class="pos">29</td>
+        <td class="name">mtrixx</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="num" title="13,699,666">13.70M</td>
+        <td class="num muted hide-sm">10.31M</td>
+        <td class="num muted hide-sm">3.39M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">30</td>
+        <td class="name">〆VΞYX</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="51,171,094">51.17M</td>
+        <td class="num muted hide-sm">30.51M</td>
+        <td class="num muted hide-sm">20.66M</td>
+        <td>TC 30</td>
+        <td class="num muted hide-sm">5.98M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">31</td>
+        <td class="name">Elgnro</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="43,836,133">43.84M</td>
+        <td class="num muted hide-sm">31.68M</td>
+        <td class="num muted hide-sm">12.16M</td>
+        <td>TC 27</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">32</td>
+        <td class="name">numaan</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="43,037,450">43.04M</td>
+        <td class="num muted hide-sm">27.27M</td>
+        <td class="num muted hide-sm">15.77M</td>
+        <td>TC 29</td>
+        <td class="num muted hide-sm">1.52M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">33</td>
+        <td class="name">Scrumdiddly</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="34,040,733">34.04M</td>
+        <td class="num muted hide-sm">25.14M</td>
+        <td class="num muted hide-sm">8.90M</td>
+        <td>TC 27</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">34</td>
+        <td class="name">SirDrizALot</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="33,541,560">33.54M</td>
+        <td class="num muted hide-sm">25.82M</td>
+        <td class="num muted hide-sm">7.72M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">35</td>
+        <td class="name">MistyDawn</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="28,590,965">28.59M</td>
+        <td class="num muted hide-sm">19.78M</td>
+        <td class="num muted hide-sm">8.81M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">1.01M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">36</td>
+        <td class="name">Bones</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="28,157,358">28.16M</td>
+        <td class="num muted hide-sm">21.20M</td>
+        <td class="num muted hide-sm">6.95M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">1.23M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">37</td>
+        <td class="name">Dark</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="28,095,262">28.10M</td>
+        <td class="num muted hide-sm">21.07M</td>
+        <td class="num muted hide-sm">7.03M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">38</td>
+        <td class="name">Nyx</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="27,147,890">27.15M</td>
+        <td class="num muted hide-sm">16.89M</td>
+        <td class="num muted hide-sm">10.26M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">39</td>
+        <td class="name">jersniper</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="24,441,426">24.44M</td>
+        <td class="num muted hide-sm">18.71M</td>
+        <td class="num muted hide-sm">5.73M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">1.62M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">40</td>
+        <td class="name">亗k4</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="24,399,528">24.40M</td>
+        <td class="num muted hide-sm">16.85M</td>
+        <td class="num muted hide-sm">7.55M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">41</td>
+        <td class="name">蛋蛋不吃蛋</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="24,232,268">24.23M</td>
+        <td class="num muted hide-sm">17.71M</td>
+        <td class="num muted hide-sm">6.53M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">42</td>
+        <td class="name">СИВИЙ</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="24,037,186">24.04M</td>
+        <td class="num muted hide-sm">17.11M</td>
+        <td class="num muted hide-sm">6.93M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">43</td>
+        <td class="name">LLÚVATAR</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="24,020,171">24.02M</td>
+        <td class="num muted hide-sm">16.16M</td>
+        <td class="num muted hide-sm">7.86M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">44</td>
+        <td class="name">StrokerAce</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="23,479,365">23.48M</td>
+        <td class="num muted hide-sm">17.99M</td>
+        <td class="num muted hide-sm">5.49M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">45</td>
+        <td class="name">บักTui</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="23,273,329">23.27M</td>
+        <td class="num muted hide-sm">16.00M</td>
+        <td class="num muted hide-sm">7.27M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">46</td>
+        <td class="name">GIOTTOMAN</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="22,228,223">22.23M</td>
+        <td class="num muted hide-sm">16.86M</td>
+        <td class="num muted hide-sm">5.37M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">47</td>
+        <td class="name">niky</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="21,751,255">21.75M</td>
+        <td class="num muted hide-sm">16.05M</td>
+        <td class="num muted hide-sm">5.70M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">48</td>
+        <td class="name">Sazabi</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="21,475,920">21.48M</td>
+        <td class="num muted hide-sm">18.40M</td>
+        <td class="num muted hide-sm">3.07M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">49</td>
+        <td class="name">EZZELDEEN</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="21,444,296">21.44M</td>
+        <td class="num muted hide-sm">15.92M</td>
+        <td class="num muted hide-sm">5.52M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">50</td>
+        <td class="name">Lancelot</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="21,298,279">21.30M</td>
+        <td class="num muted hide-sm">14.30M</td>
+        <td class="num muted hide-sm">6.99M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">51</td>
+        <td class="name">HealthCareCeo</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="21,175,937">21.18M</td>
+        <td class="num muted hide-sm">15.34M</td>
+        <td class="num muted hide-sm">5.83M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">52</td>
+        <td class="name">ZAYGIIII</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="21,045,152">21.05M</td>
+        <td class="num muted hide-sm">15.71M</td>
+        <td class="num muted hide-sm">5.34M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">53</td>
+        <td class="name">ErroR</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="20,800,518">20.80M</td>
+        <td class="num muted hide-sm">16.07M</td>
+        <td class="num muted hide-sm">4.73M</td>
+        <td>TC 26</td>
+        <td class="num muted hide-sm">1.96M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">54</td>
+        <td class="name">gan423</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="20,684,661">20.68M</td>
+        <td class="num muted hide-sm">15.16M</td>
+        <td class="num muted hide-sm">5.52M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">55</td>
+        <td class="name">Roman</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,917,564">19.92M</td>
+        <td class="num muted hide-sm">14.44M</td>
+        <td class="num muted hide-sm">5.48M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">56</td>
+        <td class="name">I&#x27;m just a guy</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,746,673">19.75M</td>
+        <td class="num muted hide-sm">14.50M</td>
+        <td class="num muted hide-sm">5.25M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">57</td>
+        <td class="name">PAPITO</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,678,158">19.68M</td>
+        <td class="num muted hide-sm">14.54M</td>
+        <td class="num muted hide-sm">5.14M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">58</td>
+        <td class="name">Popzy</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,628,073">19.63M</td>
+        <td class="num muted hide-sm">15.51M</td>
+        <td class="num muted hide-sm">4.12M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">59</td>
+        <td class="name">Wandi</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,487,539">19.49M</td>
+        <td class="num muted hide-sm">13.86M</td>
+        <td class="num muted hide-sm">5.63M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">60</td>
+        <td class="name">Trancos</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,482,662">19.48M</td>
+        <td class="num muted hide-sm">14.07M</td>
+        <td class="num muted hide-sm">5.41M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">61</td>
+        <td class="name">Gurrburr</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,293,108">19.29M</td>
+        <td class="num muted hide-sm">15.84M</td>
+        <td class="num muted hide-sm">3.45M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">62</td>
+        <td class="name">Thorrr</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,236,386">19.24M</td>
+        <td class="num muted hide-sm">14.99M</td>
+        <td class="num muted hide-sm">4.24M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">915.8K</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">63</td>
+        <td class="name">Odysseus</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="19,027,949">19.03M</td>
+        <td class="num muted hide-sm">15.58M</td>
+        <td class="num muted hide-sm">3.44M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">1.44M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">64</td>
+        <td class="name">MrClay</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,939,389">18.94M</td>
+        <td class="num muted hide-sm">14.25M</td>
+        <td class="num muted hide-sm">4.69M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">65</td>
+        <td class="name">큰형님</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,606,687">18.61M</td>
+        <td class="num muted hide-sm">13.35M</td>
+        <td class="num muted hide-sm">5.26M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">66</td>
+        <td class="name">幻海航行</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,566,659">18.57M</td>
+        <td class="num muted hide-sm">14.66M</td>
+        <td class="num muted hide-sm">3.91M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">67</td>
+        <td class="name">SirNil</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,547,327">18.55M</td>
+        <td class="num muted hide-sm">13.14M</td>
+        <td class="num muted hide-sm">5.41M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">1.11M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">68</td>
+        <td class="name">McSekanlı</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,296,166">18.30M</td>
+        <td class="num muted hide-sm">13.03M</td>
+        <td class="num muted hide-sm">5.27M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">69</td>
+        <td class="name">Riddle</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,289,533">18.29M</td>
+        <td class="num muted hide-sm">13.20M</td>
+        <td class="num muted hide-sm">5.09M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">70</td>
+        <td class="name">GANDALF</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,288,860">18.29M</td>
+        <td class="num muted hide-sm">12.91M</td>
+        <td class="num muted hide-sm">5.38M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">71</td>
+        <td class="name">Lord Raven</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="18,044,766">18.04M</td>
+        <td class="num muted hide-sm">13.57M</td>
+        <td class="num muted hide-sm">4.47M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">72</td>
+        <td class="name">Lordihno</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,705,209">17.71M</td>
+        <td class="num muted hide-sm">13.63M</td>
+        <td class="num muted hide-sm">4.08M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">73</td>
+        <td class="name">Amira</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,508,891">17.51M</td>
+        <td class="num muted hide-sm">12.46M</td>
+        <td class="num muted hide-sm">5.04M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">74</td>
+        <td class="name">Dangerdog</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,457,506">17.46M</td>
+        <td class="num muted hide-sm">12.16M</td>
+        <td class="num muted hide-sm">5.30M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">75</td>
+        <td class="name">Thelordduke</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,429,753">17.43M</td>
+        <td class="num muted hide-sm">12.45M</td>
+        <td class="num muted hide-sm">4.98M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">76</td>
+        <td class="name">Prymitive</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,414,314">17.41M</td>
+        <td class="num muted hide-sm">12.64M</td>
+        <td class="num muted hide-sm">4.77M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">77</td>
+        <td class="name">Jonna</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,396,125">17.40M</td>
+        <td class="num muted hide-sm">12.28M</td>
+        <td class="num muted hide-sm">5.11M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">78</td>
+        <td class="name">RubTumpkins</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,352,297">17.35M</td>
+        <td class="num muted hide-sm">12.32M</td>
+        <td class="num muted hide-sm">5.03M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">79</td>
+        <td class="name">Zitos</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,326,139">17.33M</td>
+        <td class="num muted hide-sm">13.11M</td>
+        <td class="num muted hide-sm">4.22M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">80</td>
+        <td class="name">ATK615</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,303,748">17.30M</td>
+        <td class="num muted hide-sm">13.10M</td>
+        <td class="num muted hide-sm">4.21M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">81</td>
+        <td class="name">holy lord</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,160,386">17.16M</td>
+        <td class="num muted hide-sm">13.53M</td>
+        <td class="num muted hide-sm">3.63M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">82</td>
+        <td class="name">hermajestythking</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,133,975">17.13M</td>
+        <td class="num muted hide-sm">12.42M</td>
+        <td class="num muted hide-sm">4.72M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">83</td>
+        <td class="name">rodan_22</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,072,748">17.07M</td>
+        <td class="num muted hide-sm">12.62M</td>
+        <td class="num muted hide-sm">4.45M</td>
+        <td>TC 22</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">84</td>
+        <td class="name">Baus Hawg</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="17,025,720">17.03M</td>
+        <td class="num muted hide-sm">13.64M</td>
+        <td class="num muted hide-sm">3.39M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">1.39M</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">85</td>
+        <td class="name">GoDST0rM</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,734,347">16.73M</td>
+        <td class="num muted hide-sm">13.02M</td>
+        <td class="num muted hide-sm">3.72M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">86</td>
+        <td class="name">IsLena</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,687,509">16.69M</td>
+        <td class="num muted hide-sm">11.45M</td>
+        <td class="num muted hide-sm">5.24M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">87</td>
+        <td class="name">活著真好</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,443,477">16.44M</td>
+        <td class="num muted hide-sm">13.07M</td>
+        <td class="num muted hide-sm">3.37M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">88</td>
+        <td class="name">Karont</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,373,451">16.37M</td>
+        <td class="num muted hide-sm">11.72M</td>
+        <td class="num muted hide-sm">4.65M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">89</td>
+        <td class="name">ⒶⓂⒷ⓪⑦</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,356,207">16.36M</td>
+        <td class="num muted hide-sm">13.09M</td>
+        <td class="num muted hide-sm">3.27M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">90</td>
+        <td class="name">EriktheRed</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,329,407">16.33M</td>
+        <td class="num muted hide-sm">13.19M</td>
+        <td class="num muted hide-sm">3.14M</td>
+        <td>TC 25</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">91</td>
+        <td class="name">Ⓢⓚⓨ</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,306,990">16.31M</td>
+        <td class="num muted hide-sm">11.46M</td>
+        <td class="num muted hide-sm">4.84M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">92</td>
+        <td class="name">Anayble</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,041,082">16.04M</td>
+        <td class="num muted hide-sm">12.52M</td>
+        <td class="num muted hide-sm">3.52M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">93</td>
+        <td class="name">ALİK</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="16,010,179">16.01M</td>
+        <td class="num muted hide-sm">12.03M</td>
+        <td class="num muted hide-sm">3.98M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">94</td>
+        <td class="name">Lion of Judah</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="15,654,492">15.65M</td>
+        <td class="num muted hide-sm">13.24M</td>
+        <td class="num muted hide-sm">2.42M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">95</td>
+        <td class="name">Estyfisherman</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="15,560,156">15.56M</td>
+        <td class="num muted hide-sm">11.82M</td>
+        <td class="num muted hide-sm">3.74M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">96</td>
+        <td class="name">cluster</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="15,447,731">15.45M</td>
+        <td class="num muted hide-sm">12.32M</td>
+        <td class="num muted hide-sm">3.12M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">97</td>
+        <td class="name">Arwen Beastiee</td>
+        <td><span class="role" style="--c:#a78bfa">R4</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="14,617,998">14.62M</td>
+        <td class="num muted hide-sm">9.16M</td>
+        <td class="num muted hide-sm">5.46M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">98</td>
+        <td class="name">gguugguu</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="14,511,665">14.51M</td>
+        <td class="num muted hide-sm">10.71M</td>
+        <td class="num muted hide-sm">3.80M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">99</td>
+        <td class="name">AthenaX</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="14,414,993">14.41M</td>
+        <td class="num muted hide-sm">10.66M</td>
+        <td class="num muted hide-sm">3.76M</td>
+        <td>TC 24</td>
+        <td class="num muted hide-sm">—</td>
+      </tr>
+      <tr data-bt="18:00 UTC">
+        <td class="pos">100</td>
+        <td class="name">NOOP</td>
+        <td><span class="role" style="--c:#60a5fa">R3</span></td>
+        <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="num" title="12,680,164">12.68M</td>
+        <td class="num muted hide-sm">10.44M</td>
+        <td class="num muted hide-sm">2.24M</td>
+        <td>TC 23</td>
+        <td class="num muted hide-sm">—</td>
+      </tr></tbody>
+        </table>
+      </div>
+    </section>
+    <footer>
+      29 players from the early list → BT 01:00 UTC. Remaining TFU members → BT 18:00 UTC.
+      Excluded (not on roster): XYunusX, ปูป๋องแป้ง, Blackwolf, Cherry Oak, Th3yFearMe, Thorr, GoDSTorM.
+    </footer>
+  </main>
+  <script>
+    const q = document.getElementById('q');
+    const showing = document.getElementById('showing');
+    const rows = [...document.querySelectorAll('#rows tr')];
+    let filter = 'all';
+    function apply() {
+      const needle = q.value.trim().toLowerCase();
+      let visible = 0;
+      for (const row of rows) {
+        const name = row.querySelector('.name')?.textContent.toLowerCase() || '';
+        const bt = row.dataset.bt || '';
+        const okFilter = filter === 'all' || bt === filter;
+        const okSearch = !needle || name.includes(needle);
+        const show = okFilter && okSearch;
+        row.style.display = show ? '' : 'none';
+        if (show) visible += 1;
+      }
+      const label =
+        filter === 'all' ? 'players' :
+        filter === '01:00 UTC' ? 'players · BT 01:00' :
+        'players · BT 18:00';
+      showing.innerHTML = `Showing <strong>${visible}</strong> ${label}`;
+    }
+    q.addEventListener('input', apply);
+    document.getElementById('filters').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-filter]');
+      if (!btn) return;
+      filter = btn.dataset.filter;
+      for (const b of document.querySelectorAll('#filters button')) {
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      }
+      apply();
+    });
+  </script>
+</body>
+</html>
