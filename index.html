@@ -236,12 +236,12 @@
     <section class="panel">
       <div class="toolbar">
         <div class="toggle" id="filters" role="tablist" aria-label="BT filter">
-          <button type="button" role="tab" data-filter="01:00 UTC" class="active" aria-selected="true">BT 01:00</button>
-          <button type="button" role="tab" data-filter="18:00 UTC" aria-selected="false">BT 18:00</button>
+          <button type="button" role="tab" data-filter="01:00 UTC" class="active" aria-selected="true">1:00 UTC</button>
+          <button type="button" role="tab" data-filter="18:00 UTC" aria-selected="false">18:00 UTC</button>
         </div>
         <div class="toolbar-row">
           <input id="q" type="search" placeholder="Search player name…" autocomplete="off" />
-          <div class="showing" id="showing">Showing <strong>36</strong> players · BT 01:00</div>
+          <div class="showing" id="showing">Showing <strong>36</strong> players · 1:00 UTC</div>
         </div>
       </div>
       <table>
@@ -1381,7 +1381,7 @@
         row.style.display = show ? '' : 'none';
         if (show) visible += 1;
       }
-      const label = filter === '01:00 UTC' ? 'players · BT 01:00' : 'players · BT 18:00';
+      const label = filter === '01:00 UTC' ? 'players · 1:00 UTC' : 'players · 18:00 UTC';
       showing.innerHTML = `Showing <strong>${visible}</strong> ${label}`;
     }
     q.addEventListener('input', apply);
