@@ -216,6 +216,15 @@
       .hide-sm { display: none; }
       .toggle button { font-size: 0.92rem; padding: 0.95rem 0.7rem; }
     }
+  
+    td.coords, th.coords {
+      font-variant-numeric: tabular-nums;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    td.coords { color: var(--text); }
   </style>
 </head>
 <body>
@@ -251,6 +260,7 @@
             <th>Player</th>
             <th>Role</th>
             <th>BT</th>
+            <th class="coords">Coords</th>
             <th class="num">Total Power</th>
             <th class="num hide-sm">Combat</th>
             <th class="num hide-sm">Troop</th>
@@ -264,6 +274,7 @@
         <td class="name">〆VΞYX</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords muted">—</td>
         <td class="num" title="51,171,094">51.17M</td>
         <td class="num muted hide-sm">30.51M</td>
         <td class="num muted hide-sm">20.66M</td>
@@ -275,6 +286,7 @@
         <td class="name">Merlin</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">475, 648</td>
         <td class="num" title="45,195,273">45.20M</td>
         <td class="num muted hide-sm">32.47M</td>
         <td class="num muted hide-sm">12.72M</td>
@@ -286,6 +298,7 @@
         <td class="name">Vizuru</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">473, 651</td>
         <td class="num" title="43,998,584">44.00M</td>
         <td class="num muted hide-sm">31.82M</td>
         <td class="num muted hide-sm">12.17M</td>
@@ -297,6 +310,7 @@
         <td class="name">Elgnro</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">472, 653</td>
         <td class="num" title="43,836,133">43.84M</td>
         <td class="num muted hide-sm">31.68M</td>
         <td class="num muted hide-sm">12.16M</td>
@@ -308,6 +322,7 @@
         <td class="name">numaan</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 643</td>
         <td class="num" title="43,037,450">43.04M</td>
         <td class="num muted hide-sm">27.27M</td>
         <td class="num muted hide-sm">15.77M</td>
@@ -319,6 +334,7 @@
         <td class="name">TheyFearMe</td>
         <td><span class="role" style="--c:oklch(0.768 0.233 130.85)">R5</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">477, 651</td>
         <td class="num" title="34,363,107">34.36M</td>
         <td class="num muted hide-sm">19.77M</td>
         <td class="num muted hide-sm">14.59M</td>
@@ -330,6 +346,7 @@
         <td class="name">Scrumdiddly</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">477, 653</td>
         <td class="num" title="34,040,733">34.04M</td>
         <td class="num muted hide-sm">25.14M</td>
         <td class="num muted hide-sm">8.90M</td>
@@ -341,6 +358,7 @@
         <td class="name">SirDrizALot</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">475, 646</td>
         <td class="num" title="33,541,560">33.54M</td>
         <td class="num muted hide-sm">25.82M</td>
         <td class="num muted hide-sm">7.72M</td>
@@ -352,6 +370,7 @@
         <td class="name">MistyDawn</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 645</td>
         <td class="num" title="28,590,965">28.59M</td>
         <td class="num muted hide-sm">19.78M</td>
         <td class="num muted hide-sm">8.81M</td>
@@ -363,6 +382,7 @@
         <td class="name">Bones</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 647</td>
         <td class="num" title="28,157,358">28.16M</td>
         <td class="num muted hide-sm">21.20M</td>
         <td class="num muted hide-sm">6.95M</td>
@@ -374,6 +394,7 @@
         <td class="name">Dark</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">473, 647</td>
         <td class="num" title="28,095,262">28.10M</td>
         <td class="num muted hide-sm">21.07M</td>
         <td class="num muted hide-sm">7.03M</td>
@@ -385,6 +406,7 @@
         <td class="name">Nyx</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">473, 645</td>
         <td class="num" title="27,147,890">27.15M</td>
         <td class="num muted hide-sm">16.89M</td>
         <td class="num muted hide-sm">10.26M</td>
@@ -396,6 +418,7 @@
         <td class="name">kivgrad</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">473, 649</td>
         <td class="num" title="26,347,789">26.35M</td>
         <td class="num muted hide-sm">20.25M</td>
         <td class="num muted hide-sm">6.10M</td>
@@ -407,6 +430,7 @@
         <td class="name">DutyFree</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">477, 649</td>
         <td class="num" title="24,485,504">24.49M</td>
         <td class="num muted hide-sm">17.66M</td>
         <td class="num muted hide-sm">6.82M</td>
@@ -418,6 +442,7 @@
         <td class="name">jersniper</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">472, 641</td>
         <td class="num" title="24,441,426">24.44M</td>
         <td class="num muted hide-sm">18.71M</td>
         <td class="num muted hide-sm">5.73M</td>
@@ -429,6 +454,7 @@
         <td class="name">亗k4</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">474, 638</td>
         <td class="num" title="24,399,528">24.40M</td>
         <td class="num muted hide-sm">16.85M</td>
         <td class="num muted hide-sm">7.55M</td>
@@ -440,6 +466,7 @@
         <td class="name">蛋蛋不吃蛋</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">474, 656</td>
         <td class="num" title="24,232,268">24.23M</td>
         <td class="num muted hide-sm">17.71M</td>
         <td class="num muted hide-sm">6.53M</td>
@@ -451,6 +478,7 @@
         <td class="name">СИВИЙ</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">474, 658</td>
         <td class="num" title="24,037,186">24.04M</td>
         <td class="num muted hide-sm">17.11M</td>
         <td class="num muted hide-sm">6.93M</td>
@@ -462,6 +490,7 @@
         <td class="name">LLÚVATAR</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">472, 655</td>
         <td class="num" title="24,020,171">24.02M</td>
         <td class="num muted hide-sm">16.16M</td>
         <td class="num muted hide-sm">7.86M</td>
@@ -473,6 +502,7 @@
         <td class="name">StrokerAce</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">472, 639</td>
         <td class="num" title="23,479,365">23.48M</td>
         <td class="num muted hide-sm">17.99M</td>
         <td class="num muted hide-sm">5.49M</td>
@@ -484,6 +514,7 @@
         <td class="name">บักTui</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 639</td>
         <td class="num" title="23,273,329">23.27M</td>
         <td class="num muted hide-sm">16.00M</td>
         <td class="num muted hide-sm">7.27M</td>
@@ -495,6 +526,7 @@
         <td class="name">라지카쵸리</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">477, 655</td>
         <td class="num" title="22,571,427">22.57M</td>
         <td class="num muted hide-sm">17.63M</td>
         <td class="num muted hide-sm">4.94M</td>
@@ -506,6 +538,7 @@
         <td class="name">GIOTTOMAN</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 639</td>
         <td class="num" title="22,228,223">22.23M</td>
         <td class="num muted hide-sm">16.86M</td>
         <td class="num muted hide-sm">5.37M</td>
@@ -517,6 +550,7 @@
         <td class="name">niky</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 637</td>
         <td class="num" title="21,751,255">21.75M</td>
         <td class="num muted hide-sm">16.05M</td>
         <td class="num muted hide-sm">5.70M</td>
@@ -528,6 +562,7 @@
         <td class="name">Sazabi</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">476, 657</td>
         <td class="num" title="21,475,920">21.48M</td>
         <td class="num muted hide-sm">18.40M</td>
         <td class="num muted hide-sm">3.07M</td>
@@ -539,6 +574,7 @@
         <td class="name">EZZELDEEN</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">472, 637</td>
         <td class="num" title="21,444,296">21.44M</td>
         <td class="num muted hide-sm">15.92M</td>
         <td class="num muted hide-sm">5.52M</td>
@@ -550,6 +586,7 @@
         <td class="name">Lancelot</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">472, 657</td>
         <td class="num" title="21,298,279">21.30M</td>
         <td class="num muted hide-sm">14.30M</td>
         <td class="num muted hide-sm">6.99M</td>
@@ -561,6 +598,7 @@
         <td class="name">HealthCareCeo</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 641</td>
         <td class="num" title="21,175,937">21.18M</td>
         <td class="num muted hide-sm">15.34M</td>
         <td class="num muted hide-sm">5.83M</td>
@@ -572,6 +610,7 @@
         <td class="name">ZAYGIIII</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">478, 657</td>
         <td class="num" title="21,045,152">21.05M</td>
         <td class="num muted hide-sm">15.71M</td>
         <td class="num muted hide-sm">5.34M</td>
@@ -583,6 +622,7 @@
         <td class="name">ErroR</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 637</td>
         <td class="num" title="20,800,518">20.80M</td>
         <td class="num muted hide-sm">16.07M</td>
         <td class="num muted hide-sm">4.73M</td>
@@ -594,6 +634,7 @@
         <td class="name">gan423</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">470, 641</td>
         <td class="num" title="20,684,661">20.68M</td>
         <td class="num muted hide-sm">15.16M</td>
         <td class="num muted hide-sm">5.52M</td>
@@ -605,6 +646,7 @@
         <td class="name">Satpol PP</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">472, 659</td>
         <td class="num" title="20,214,773">20.21M</td>
         <td class="num muted hide-sm">14.13M</td>
         <td class="num muted hide-sm">6.08M</td>
@@ -616,6 +658,7 @@
         <td class="name">مهدی</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">477, 659</td>
         <td class="num" title="20,115,142">20.12M</td>
         <td class="num muted hide-sm">13.58M</td>
         <td class="num muted hide-sm">6.53M</td>
@@ -627,6 +670,7 @@
         <td class="name">WOOD</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">475, 650</td>
         <td class="num" title="20,075,869">20.08M</td>
         <td class="num muted hide-sm">15.93M</td>
         <td class="num muted hide-sm">4.15M</td>
@@ -638,6 +682,7 @@
         <td class="name">Roman</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">470, 639</td>
         <td class="num" title="19,917,564">19.92M</td>
         <td class="num muted hide-sm">14.44M</td>
         <td class="num muted hide-sm">5.48M</td>
@@ -649,6 +694,7 @@
         <td class="name">~Zew~</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">479, 655</td>
         <td class="num" title="19,870,672">19.87M</td>
         <td class="num muted hide-sm">15.64M</td>
         <td class="num muted hide-sm">4.23M</td>
@@ -660,6 +706,7 @@
         <td class="name">I&#x27;m just a guy</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords muted">—</td>
         <td class="num" title="19,746,673">19.75M</td>
         <td class="num muted hide-sm">14.50M</td>
         <td class="num muted hide-sm">5.25M</td>
@@ -671,6 +718,7 @@
         <td class="name">PAPITO</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">475, 636</td>
         <td class="num" title="19,678,158">19.68M</td>
         <td class="num muted hide-sm">14.54M</td>
         <td class="num muted hide-sm">5.14M</td>
@@ -682,6 +730,7 @@
         <td class="name">Popzy</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">473, 635</td>
         <td class="num" title="19,628,073">19.63M</td>
         <td class="num muted hide-sm">15.51M</td>
         <td class="num muted hide-sm">4.12M</td>
@@ -693,6 +742,7 @@
         <td class="name">SNØW BERK</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">479, 653</td>
         <td class="num" title="19,536,695">19.54M</td>
         <td class="num muted hide-sm">12.74M</td>
         <td class="num muted hide-sm">6.80M</td>
@@ -704,6 +754,7 @@
         <td class="name">Wandi</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">471, 635</td>
         <td class="num" title="19,487,539">19.49M</td>
         <td class="num muted hide-sm">13.86M</td>
         <td class="num muted hide-sm">5.63M</td>
@@ -715,6 +766,7 @@
         <td class="name">Trancos</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 635</td>
         <td class="num" title="19,482,662">19.48M</td>
         <td class="num muted hide-sm">14.07M</td>
         <td class="num muted hide-sm">5.41M</td>
@@ -726,6 +778,7 @@
         <td class="name">KOR T380</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">470, 653</td>
         <td class="num" title="19,469,657">19.47M</td>
         <td class="num muted hide-sm">14.15M</td>
         <td class="num muted hide-sm">5.32M</td>
@@ -737,6 +790,7 @@
         <td class="name">AKA</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">479, 659</td>
         <td class="num" title="19,448,147">19.45M</td>
         <td class="num muted hide-sm">13.98M</td>
         <td class="num muted hide-sm">5.47M</td>
@@ -748,6 +802,7 @@
         <td class="name">CARTEL SPARTANs</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">470, 655</td>
         <td class="num" title="19,301,380">19.30M</td>
         <td class="num muted hide-sm">12.92M</td>
         <td class="num muted hide-sm">6.39M</td>
@@ -759,6 +814,7 @@
         <td class="name">Gurrburr</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 635</td>
         <td class="num" title="19,293,108">19.29M</td>
         <td class="num muted hide-sm">15.84M</td>
         <td class="num muted hide-sm">3.45M</td>
@@ -770,6 +826,7 @@
         <td class="name">Thorrr</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">470, 657</td>
         <td class="num" title="19,236,386">19.24M</td>
         <td class="num muted hide-sm">14.99M</td>
         <td class="num muted hide-sm">4.24M</td>
@@ -781,6 +838,7 @@
         <td class="name">Choi</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">470, 659</td>
         <td class="num" title="19,108,422">19.11M</td>
         <td class="num muted hide-sm">14.25M</td>
         <td class="num muted hide-sm">4.86M</td>
@@ -792,6 +850,7 @@
         <td class="name">Odysseus</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">483, 649</td>
         <td class="num" title="19,027,949">19.03M</td>
         <td class="num muted hide-sm">15.58M</td>
         <td class="num muted hide-sm">3.44M</td>
@@ -803,6 +862,7 @@
         <td class="name">MrClay</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">483, 653</td>
         <td class="num" title="18,939,389">18.94M</td>
         <td class="num muted hide-sm">14.25M</td>
         <td class="num muted hide-sm">4.69M</td>
@@ -814,6 +874,7 @@
         <td class="name">kilord</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">479, 649</td>
         <td class="num" title="18,891,473">18.89M</td>
         <td class="num muted hide-sm">13.27M</td>
         <td class="num muted hide-sm">5.62M</td>
@@ -825,6 +886,7 @@
         <td class="name">큰형님</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 639</td>
         <td class="num" title="18,606,687">18.61M</td>
         <td class="num muted hide-sm">13.35M</td>
         <td class="num muted hide-sm">5.26M</td>
@@ -836,6 +898,7 @@
         <td class="name">幻海航行</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">468, 641</td>
         <td class="num" title="18,566,659">18.57M</td>
         <td class="num muted hide-sm">14.66M</td>
         <td class="num muted hide-sm">3.91M</td>
@@ -847,6 +910,7 @@
         <td class="name">SirNil</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">471, 645</td>
         <td class="num" title="18,547,327">18.55M</td>
         <td class="num muted hide-sm">13.14M</td>
         <td class="num muted hide-sm">5.41M</td>
@@ -858,6 +922,7 @@
         <td class="name">McSekanlı</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 645</td>
         <td class="num" title="18,296,166">18.30M</td>
         <td class="num muted hide-sm">13.03M</td>
         <td class="num muted hide-sm">5.27M</td>
@@ -869,6 +934,7 @@
         <td class="name">Riddle</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">471, 647</td>
         <td class="num" title="18,289,533">18.29M</td>
         <td class="num muted hide-sm">13.20M</td>
         <td class="num muted hide-sm">5.09M</td>
@@ -880,6 +946,7 @@
         <td class="name">GANDALF</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">471, 643</td>
         <td class="num" title="18,288,860">18.29M</td>
         <td class="num muted hide-sm">12.91M</td>
         <td class="num muted hide-sm">5.38M</td>
@@ -891,6 +958,7 @@
         <td class="name">SaintM</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">479, 651</td>
         <td class="num" title="18,198,455">18.20M</td>
         <td class="num muted hide-sm">14.40M</td>
         <td class="num muted hide-sm">3.80M</td>
@@ -902,6 +970,7 @@
         <td class="name">Lord Raven</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">471, 651</td>
         <td class="num" title="18,044,766">18.04M</td>
         <td class="num muted hide-sm">13.57M</td>
         <td class="num muted hide-sm">4.47M</td>
@@ -913,6 +982,7 @@
         <td class="name">wolf leon</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">471, 649</td>
         <td class="num" title="17,832,409">17.83M</td>
         <td class="num muted hide-sm">12.50M</td>
         <td class="num muted hide-sm">5.34M</td>
@@ -924,6 +994,7 @@
         <td class="name">Lordihno</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 647</td>
         <td class="num" title="17,705,209">17.71M</td>
         <td class="num muted hide-sm">13.63M</td>
         <td class="num muted hide-sm">4.08M</td>
@@ -935,6 +1006,7 @@
         <td class="name">BilboSwaggins</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">469, 650</td>
         <td class="num" title="17,697,260">17.70M</td>
         <td class="num muted hide-sm">13.76M</td>
         <td class="num muted hide-sm">3.94M</td>
@@ -946,6 +1018,7 @@
         <td class="name">bayo Angin</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">481, 651</td>
         <td class="num" title="17,576,493">17.58M</td>
         <td class="num muted hide-sm">13.81M</td>
         <td class="num muted hide-sm">3.77M</td>
@@ -957,6 +1030,7 @@
         <td class="name">Amira</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">469, 646</td>
         <td class="num" title="17,508,891">17.51M</td>
         <td class="num muted hide-sm">12.46M</td>
         <td class="num muted hide-sm">5.04M</td>
@@ -968,6 +1042,7 @@
         <td class="name">Dangerdog</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">467, 646</td>
         <td class="num" title="17,457,506">17.46M</td>
         <td class="num muted hide-sm">12.16M</td>
         <td class="num muted hide-sm">5.30M</td>
@@ -979,6 +1054,7 @@
         <td class="name">Thelordduke</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">468, 639</td>
         <td class="num" title="17,429,753">17.43M</td>
         <td class="num muted hide-sm">12.45M</td>
         <td class="num muted hide-sm">4.98M</td>
@@ -990,6 +1066,7 @@
         <td class="name">Prymitive</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">469, 648</td>
         <td class="num" title="17,414,314">17.41M</td>
         <td class="num muted hide-sm">12.64M</td>
         <td class="num muted hide-sm">4.77M</td>
@@ -1001,6 +1078,7 @@
         <td class="name">Jonna</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">475, 643</td>
         <td class="num" title="17,396,125">17.40M</td>
         <td class="num muted hide-sm">12.28M</td>
         <td class="num muted hide-sm">5.11M</td>
@@ -1012,6 +1090,7 @@
         <td class="name">RubTumpkins</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">467, 643</td>
         <td class="num" title="17,352,297">17.35M</td>
         <td class="num muted hide-sm">12.32M</td>
         <td class="num muted hide-sm">5.03M</td>
@@ -1023,6 +1102,7 @@
         <td class="name">Zitos</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">481, 643</td>
         <td class="num" title="17,326,139">17.33M</td>
         <td class="num muted hide-sm">13.11M</td>
         <td class="num muted hide-sm">4.22M</td>
@@ -1034,6 +1114,7 @@
         <td class="name">ATK615</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords muted">—</td>
         <td class="num" title="17,303,748">17.30M</td>
         <td class="num muted hide-sm">13.10M</td>
         <td class="num muted hide-sm">4.21M</td>
@@ -1045,6 +1126,7 @@
         <td class="name">Joyboy</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">481, 649</td>
         <td class="num" title="17,236,080">17.24M</td>
         <td class="num muted hide-sm">12.43M</td>
         <td class="num muted hide-sm">4.81M</td>
@@ -1056,6 +1138,7 @@
         <td class="name">holy lord</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">481, 639</td>
         <td class="num" title="17,160,386">17.16M</td>
         <td class="num muted hide-sm">13.53M</td>
         <td class="num muted hide-sm">3.63M</td>
@@ -1067,6 +1150,7 @@
         <td class="name">hermajestythking</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">481, 637</td>
         <td class="num" title="17,133,975">17.13M</td>
         <td class="num muted hide-sm">12.42M</td>
         <td class="num muted hide-sm">4.72M</td>
@@ -1078,6 +1162,7 @@
         <td class="name">rodan_22</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">481, 653</td>
         <td class="num" title="17,072,748">17.07M</td>
         <td class="num muted hide-sm">12.62M</td>
         <td class="num muted hide-sm">4.45M</td>
@@ -1089,6 +1174,7 @@
         <td class="name">Baus Hawg</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">481, 635</td>
         <td class="num" title="17,025,720">17.03M</td>
         <td class="num muted hide-sm">13.64M</td>
         <td class="num muted hide-sm">3.39M</td>
@@ -1100,6 +1186,7 @@
         <td class="name">GoDST0rM</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">468, 636</td>
         <td class="num" title="16,734,347">16.73M</td>
         <td class="num muted hide-sm">13.02M</td>
         <td class="num muted hide-sm">3.72M</td>
@@ -1111,6 +1198,7 @@
         <td class="name">IsLena</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">468, 653</td>
         <td class="num" title="16,687,509">16.69M</td>
         <td class="num muted hide-sm">11.45M</td>
         <td class="num muted hide-sm">5.24M</td>
@@ -1122,6 +1210,7 @@
         <td class="name">Lord Hero Kaspo</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">468, 655</td>
         <td class="num" title="16,567,926">16.57M</td>
         <td class="num muted hide-sm">12.38M</td>
         <td class="num muted hide-sm">4.19M</td>
@@ -1133,6 +1222,7 @@
         <td class="name">活著真好</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">473, 633</td>
         <td class="num" title="16,443,477">16.44M</td>
         <td class="num muted hide-sm">13.07M</td>
         <td class="num muted hide-sm">3.37M</td>
@@ -1144,6 +1234,7 @@
         <td class="name">Karont</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">471, 633</td>
         <td class="num" title="16,373,451">16.37M</td>
         <td class="num muted hide-sm">11.72M</td>
         <td class="num muted hide-sm">4.65M</td>
@@ -1155,6 +1246,7 @@
         <td class="name">ⒶⓂⒷ⓪⑦</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">469, 634</td>
         <td class="num" title="16,356,207">16.36M</td>
         <td class="num muted hide-sm">13.09M</td>
         <td class="num muted hide-sm">3.27M</td>
@@ -1166,6 +1258,7 @@
         <td class="name">EriktheRed</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">477, 633</td>
         <td class="num" title="16,329,407">16.33M</td>
         <td class="num muted hide-sm">13.19M</td>
         <td class="num muted hide-sm">3.14M</td>
@@ -1177,6 +1270,7 @@
         <td class="name">Ⓢⓚⓨ</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">475, 634</td>
         <td class="num" title="16,306,990">16.31M</td>
         <td class="num muted hide-sm">11.46M</td>
         <td class="num muted hide-sm">4.84M</td>
@@ -1188,6 +1282,7 @@
         <td class="name">Mathi201015</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">468, 657</td>
         <td class="num" title="16,271,587">16.27M</td>
         <td class="num muted hide-sm">11.96M</td>
         <td class="num muted hide-sm">4.31M</td>
@@ -1199,6 +1294,7 @@
         <td class="name">Anayble</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 633</td>
         <td class="num" title="16,041,082">16.04M</td>
         <td class="num muted hide-sm">12.52M</td>
         <td class="num muted hide-sm">3.52M</td>
@@ -1210,6 +1306,7 @@
         <td class="name">ALİK</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">481, 633</td>
         <td class="num" title="16,010,179">16.01M</td>
         <td class="num muted hide-sm">12.03M</td>
         <td class="num muted hide-sm">3.98M</td>
@@ -1221,6 +1318,7 @@
         <td class="name">saeed afshar zad</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">481, 655</td>
         <td class="num" title="15,939,136">15.94M</td>
         <td class="num muted hide-sm">11.64M</td>
         <td class="num muted hide-sm">4.30M</td>
@@ -1232,6 +1330,7 @@
         <td class="name">faraz12</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">480, 657</td>
         <td class="num" title="15,774,997">15.77M</td>
         <td class="num muted hide-sm">13.18M</td>
         <td class="num muted hide-sm">2.60M</td>
@@ -1243,6 +1342,7 @@
         <td class="name">Lion of Judah</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">475, 632</td>
         <td class="num" title="15,654,492">15.65M</td>
         <td class="num muted hide-sm">13.24M</td>
         <td class="num muted hide-sm">2.42M</td>
@@ -1254,6 +1354,7 @@
         <td class="name">Estyfisherman</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">466, 641</td>
         <td class="num" title="15,560,156">15.56M</td>
         <td class="num muted hide-sm">11.82M</td>
         <td class="num muted hide-sm">3.74M</td>
@@ -1265,6 +1366,7 @@
         <td class="name">cluster</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">466, 639</td>
         <td class="num" title="15,447,731">15.45M</td>
         <td class="num muted hide-sm">12.32M</td>
         <td class="num muted hide-sm">3.12M</td>
@@ -1276,6 +1378,7 @@
         <td class="name">Billyyinyin</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">481, 659</td>
         <td class="num" title="15,415,867">15.42M</td>
         <td class="num muted hide-sm">12.02M</td>
         <td class="num muted hide-sm">3.40M</td>
@@ -1287,6 +1390,7 @@
         <td class="name">Eliassito99</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">482, 657</td>
         <td class="num" title="14,865,988">14.87M</td>
         <td class="num muted hide-sm">10.42M</td>
         <td class="num muted hide-sm">4.45M</td>
@@ -1298,6 +1402,7 @@
         <td class="name">Arwen Beastiee</td>
         <td><span class="role" style="--c:oklch(0.75 0.15 290)">R4</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">469, 643</td>
         <td class="num" title="14,617,998">14.62M</td>
         <td class="num muted hide-sm">9.16M</td>
         <td class="num muted hide-sm">5.46M</td>
@@ -1309,6 +1414,7 @@
         <td class="name">gguugguu</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">466, 637</td>
         <td class="num" title="14,511,665">14.51M</td>
         <td class="num muted hide-sm">10.71M</td>
         <td class="num muted hide-sm">3.80M</td>
@@ -1320,6 +1426,7 @@
         <td class="name">Victer</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">467, 650</td>
         <td class="num" title="14,424,624">14.42M</td>
         <td class="num muted hide-sm">10.42M</td>
         <td class="num muted hide-sm">4.01M</td>
@@ -1331,6 +1438,7 @@
         <td class="name">AthenaX</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">479, 643</td>
         <td class="num" title="14,414,993">14.41M</td>
         <td class="num muted hide-sm">10.66M</td>
         <td class="num muted hide-sm">3.76M</td>
@@ -1342,6 +1450,7 @@
         <td class="name">mtrixx</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-early">01:00 UTC</span></td>
+        <td class="coords">467, 648</td>
         <td class="num" title="13,699,666">13.70M</td>
         <td class="num muted hide-sm">10.31M</td>
         <td class="num muted hide-sm">3.39M</td>
@@ -1353,6 +1462,7 @@
         <td class="name">NOOP</td>
         <td><span class="role" style="--c:oklch(0.75 0.12 230)">R3</span></td>
         <td><span class="bt bt-late">18:00 UTC</span></td>
+        <td class="coords">467, 634</td>
         <td class="num" title="12,680,164">12.68M</td>
         <td class="num muted hide-sm">10.44M</td>
         <td class="num muted hide-sm">2.24M</td>
