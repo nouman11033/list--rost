@@ -56,38 +56,32 @@
     input[type="search"]:focus { border-color: var(--accent); }
     .toggle {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
       width: 100%;
-      gap: 0;
-      background: #0d1428;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      padding: 3px;
+      gap: 10px;
     }
     .toggle button {
       appearance: none;
-      border: 0;
-      background: transparent;
+      border: 1px solid var(--line);
+      background: #0d1428;
       color: var(--muted);
-      padding: 12px 10px;
+      padding: 18px 14px;
       cursor: pointer;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      border-radius: 9px;
-      transition: background 0.15s ease, color 0.15s ease;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      border-radius: 14px;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
     }
-    .toggle button.active[data-filter="all"] {
-      background: color-mix(in srgb, var(--accent) 22%, transparent);
-      color: var(--accent);
-    }
+    .toggle button:hover { transform: translateY(-1px); }
     .toggle button.active[data-filter="01:00 UTC"] {
       background: color-mix(in srgb, var(--early) 22%, transparent);
+      border-color: color-mix(in srgb, var(--early) 55%, transparent);
       color: var(--early);
     }
     .toggle button.active[data-filter="18:00 UTC"] {
       background: color-mix(in srgb, var(--late) 22%, transparent);
+      border-color: color-mix(in srgb, var(--late) 55%, transparent);
       color: var(--late);
     }
     .showing {
@@ -149,13 +143,12 @@
     <section class="panel">
       <div class="toolbar">
         <div class="toggle" id="filters" role="tablist" aria-label="BT filter">
-          <button type="button" role="tab" data-filter="all" class="active" aria-selected="true">All</button>
-          <button type="button" role="tab" data-filter="01:00 UTC" aria-selected="false">BT 01:00</button>
+          <button type="button" role="tab" data-filter="01:00 UTC" class="active" aria-selected="true">BT 01:00</button>
           <button type="button" role="tab" data-filter="18:00 UTC" aria-selected="false">BT 18:00</button>
         </div>
         <div class="toolbar-row">
           <input id="q" type="search" placeholder="Search player name…" autocomplete="off" />
-          <div class="showing" id="showing">Showing <strong>100</strong> players</div>
+          <div class="showing" id="showing">Showing <strong>29</strong> players · BT 01:00</div>
         </div>
       </div>
       <div style="overflow:auto; max-height: 75vh;">
@@ -1286,25 +1279,23 @@
     const q = document.getElementById('q');
     const showing = document.getElementById('showing');
     const rows = [...document.querySelectorAll('#rows tr')];
-    let filter = 'all';
+    let filter = '01:00 UTC';
     function apply() {
       const needle = q.value.trim().toLowerCase();
       let visible = 0;
       for (const row of rows) {
         const name = row.querySelector('.name')?.textContent.toLowerCase() || '';
         const bt = row.dataset.bt || '';
-        const okFilter = filter === 'all' || bt === filter;
+        const okFilter = bt === filter;
         const okSearch = !needle || name.includes(needle);
         const show = okFilter && okSearch;
         row.style.display = show ? '' : 'none';
         if (show) visible += 1;
       }
-      const label =
-        filter === 'all' ? 'players' :
-        filter === '01:00 UTC' ? 'players · BT 01:00' :
-        'players · BT 18:00';
+      const label = filter === '01:00 UTC' ? 'players · BT 01:00' : 'players · BT 18:00';
       showing.innerHTML = `Showing <strong>${visible}</strong> ${label}`;
     }
+    apply();
     q.addEventListener('input', apply);
     document.getElementById('filters').addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-filter]');
